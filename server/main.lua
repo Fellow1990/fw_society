@@ -330,7 +330,7 @@ function isPlayerBoss(playerId, job)
 end
 
 CreateThread(function()
-	local url = "https://raw.githubusercontent.com/Fellow25/version-tebex/main/"..GetCurrentResourceName()..".json"
+	local url = "https://raw.githubusercontent.com/Fellow1990/version-tebex/main/"..GetCurrentResourceName()..".json"
 	PerformHttpRequest(url, function(errorCode, resultData, resultHeaders)
 		if errorCode ~= 200 then
 			print("Erreur lors de la récupération du fichier : " .. tostring(errorCode))
