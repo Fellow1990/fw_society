@@ -4,7 +4,7 @@ game 'gta5'
 lua54 'yes'
 
 author 'fellow25'
-description 'FW Society'
+description 'FW Society (ESX Society modified with ox_lib)'
 version '1.0.0'
 
 shared_script {
@@ -30,9 +30,4 @@ dependencies {
     'es_extended',
     'cron',
     'esx_addonaccount'
-}
-
-escrow_ignore {
-	'locales/*.json',
-    'shared/*.lua'
 }
