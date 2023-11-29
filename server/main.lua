@@ -328,25 +328,3 @@ function isPlayerBoss(playerId, job)
 		return true
 	end
 end
-
-CreateThread(function()
-	local url = "https://raw.githubusercontent.com/Fellow1990/version-tebex/main/"..GetCurrentResourceName()..".json"
-	PerformHttpRequest(url, function(errorCode, resultData, resultHeaders)
-		if errorCode ~= 200 then
-			print("Erreur lors de la récupération du fichier : " .. tostring(errorCode))
-		else
-			local jsonContent = json.decode(resultData)
-			   local version = jsonContent["version"]
-			   local msg = jsonContent["msg"]
-			   local link = jsonContent["link"]
-			   if version == GetResourceMetadata(GetCurrentResourceName(), "version", 0) then
-					print("^2["..GetCurrentResourceName().."]^4 Script version is up to date: ^2"..version)
-			   else
-					print("^0["..GetCurrentResourceName().."]^4 The version of the script is not up to date : ^2"..version)
-					print("^4Your version: ^1"..GetResourceMetadata(GetCurrentResourceName(), "version", 0).. " ^0| ^4Updated version: ^2"..version)
-					print(msg)
-					print("^0["..GetCurrentResourceName().."]^4 "..link)
-			   end
-		end
-	end)
-end)
