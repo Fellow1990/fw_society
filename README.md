@@ -16,5 +16,5 @@ to
 
 ```
 local money = lib.callback.await('esx_society:getmoney', false, ESX.PlayerData.job.name)
->SendNUIMessage({ action = 'setMoney', id = 'society', value = money })
+SendNUIMessage({ action = 'setMoney', id = 'society', value = money })
 ```
