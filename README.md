@@ -3,6 +3,7 @@
 ## Installation
 ### Start before jobs.
 
+## How to modify HUD
 If you used a HUD to display company money, change this:
 
 >ESX.TriggerServerCallback('esx_society:getSocietyMoney', function(money)
