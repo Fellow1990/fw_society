@@ -1,4 +1,7 @@
-# fw_society
+### fw_society
+
+## Installation
+# Start before jobs.
 
 If you used a HUD to display company money, change this:
 
