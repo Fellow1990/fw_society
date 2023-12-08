@@ -5,7 +5,7 @@ lua54 'yes'
 
 author 'fellow25'
 description 'FW Society (ESX Society modified with ox_lib)'
-version '1.0.0'
+version '1.0.1'
 
 shared_script {
     '@es_extended/imports.lua',

@@ -124,7 +124,7 @@ function OpenEmployeeList(society, options)
 	local elements = {}
 	local employees = lib.callback.await('esx_society:getEmployees', false, society)
 	for i=1, #employees, 1 do
-		local gradeLabel = (employees[i].job.grade_label == '' and employees[i].job.label or employees[i].job.grade_label)
+		local gradeLabel = (employees[i].grade_label == '' and employees[i].label or employees[i].grade_label)
 		elements[#elements+1] = {
 			title = employees[i].name .. " | " ..gradeLabel, gradeLabel = gradeLabel,
 			icon = "fas fa-user",
@@ -151,14 +151,14 @@ function OpenSelectedEmploye(society, options, data)
 				title = locale('promote'),
 				icon = "fas fa-users",
 				onSelect = function()
-					lib.callback.await('esx_society:setJob', false, data.identifier, society, data.job.grade+1, 'promote')
+					lib.callback.await('esx_society:setJob', false, data.identifier, society, data.grade+1, 'promote')
 				end,
 			},
 			{
 				title = locale('demote'),
 				icon = "fas fa-users",
 				onSelect = function()
-					lib.callback.await('esx_society:setJob', false, data.identifier, society, data.job.grade-1, 'demote')
+					lib.callback.await('esx_society:setJob', false, data.identifier, society, data.grade-1, 'demote')
 				end,
 			},
 			{

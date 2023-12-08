@@ -131,64 +131,18 @@ end)
 
 lib.callback.register('esx_society:getEmployees', function(source, society)
 	local employees = {}
-	local xPlayers = ESX.GetExtendedPlayers('job', society)
-	for i=1, #(xPlayers) do 
-		local xPlayer = xPlayers[i]
-		local name = xPlayer.name
-		if Config.EnableESXIdentity and name == GetPlayerName(xPlayer.source) then
-			name = xPlayer.get('firstName') .. ' ' .. xPlayer.get('lastName')
-		end
-		table.insert(employees, {
-			name = name,
-			identifier = xPlayer.identifier,
-			job = {
-				name = society,
-				label = xPlayer.job.label,
-				grade = xPlayer.job.grade,
-				grade_name = xPlayer.job.grade_name,
-				grade_label = xPlayer.job.grade_label
-			}
-		})
+	local response = MySQL.query.await('SELECT * FROM `users` WHERE `job` = ?', {society})
+	for i = 1, #response do
+		local row = response[i]
+		employees[#employees+1] = {				
+			identifier = row.identifier,
+			name = row.firstname..' '..row.lastname,
+			label = Jobs[society].label,
+			grade = row.job_grade,
+			grade_name = Jobs[society].grades[tostring(row.job_grade)].name,
+			grade_label = Jobs[society].grades[tostring(row.job_grade)].label
+		}
 	end
-		
-	local query = "SELECT identifier, job_grade FROM `users` WHERE `job`= ? ORDER BY job_grade DESC"
-
-	if Config.EnableESXIdentity then
-		query = "SELECT identifier, job_grade, firstname, lastname FROM `users` WHERE `job`= ? ORDER BY job_grade DESC"
-	end
-	MySQL.query(query, {society},
-	function(result)
-		for k, row in pairs(result) do
-			local alreadyInTable
-			local identifier = row.identifier
-
-			for k, v in pairs(employees) do
-				if v.identifier == identifier then
-					alreadyInTable = true
-				end
-			end
-
-			if not alreadyInTable then
-				local name = locale('name_not_found')
-
-				if Config.EnableESXIdentity then
-					name = row.firstname .. ' ' .. row.lastname 
-				end
-				
-				table.insert(employees, {
-					name = name,
-					identifier = identifier,
-					job = {
-						name = society,
-						label = Jobs[society].label,
-						grade = row.job_grade,
-						grade_name = Jobs[society].grades[tostring(row.job_grade)].name,
-						grade_label = Jobs[society].grades[tostring(row.job_grade)].label
-					}
-				})
-			end
-		end
-	end)
 	return employees
 end)
 
