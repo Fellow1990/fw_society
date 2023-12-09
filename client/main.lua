@@ -100,6 +100,7 @@ function OpenManageEmployeesMenu(society, options)
 	lib.registerContext({
 		id = 'OpenManageEmployeesMenu',
 		title = locale('employee_management'),
+		menu = 'OpenBossMenu',
 		options = {
 			{
 				title = locale('employee_list'),
@@ -136,6 +137,7 @@ function OpenEmployeeList(society, options)
 	lib.registerContext({
 		id = 'OpenEmployeeList',
 		title = locale('employees_title'),
+		menu = 'OpenManageEmployeesMenu',
 		options = elements
 
 	})
@@ -144,8 +146,9 @@ end
 
 function OpenSelectedEmploye(society, options, data)
 	lib.registerContext({
-		id = 'OpenManageEmployeesMenu',
+		id = 'OpenSelectedEmploye',
 		title = locale('employee_management'),
+		menu = 'OpenEmployeeList',
 		options = {
 			{
 				title = locale('promote'),
@@ -170,7 +173,7 @@ function OpenSelectedEmploye(society, options, data)
 			}
 		}
 	})
-	lib.showContext('OpenManageEmployeesMenu')
+	lib.showContext('OpenSelectedEmploye')
 end
 
 function OpenRecruitMenu(society, options)
@@ -221,6 +224,7 @@ function OpenManageSalaryMenu(society, options)
 	lib.registerContext({
 		id = 'OpenManageSalaryMenu',
 		title = locale('salary_management'),
+		menu = 'OpenBossMenu',
 		options = elements
 	})
 	lib.showContext('OpenManageSalaryMenu')
@@ -247,6 +251,7 @@ function OpenManageGradesMenu(society, options)
 	lib.registerContext({
 		id = 'OpenManageGradesMenu',
 		title = locale('grade_management'),
+		menu = 'OpenBossMenu',
 		options = elements
 	})
 	lib.showContext('OpenManageGradesMenu')
