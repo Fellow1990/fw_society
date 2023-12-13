@@ -3,7 +3,6 @@
   "money_generic"                 : "%s | Salaire: %s$",
   "deposit_amount"                : "Montant du dépôt",
   "deposit_society_money"         : "Déposer argent société",
-  "employee"                      : "Employé",
   "employee_list"                 : "Liste des employés",
   "employee_management"           : "Gestion employés",
   "fire"                          : "Licencier",
@@ -27,5 +26,7 @@
   "change_label_title"            : "Nom",
   "change_label_placeholder"      : "Nom pour changer le nom du grade d'emploi..",
   "change_label_description"      : "Changer le nom de grade",
-  "employees_title"               : "Employés"
+  "employees_title"               : "Employés",
+  "money_remove_reason"           : "Dépôt de la société",
+  "money_add_reason"              : "Retrait de la société"
 }
