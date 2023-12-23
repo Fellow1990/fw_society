@@ -1,3 +1,3 @@
-🌍 FiveM | Francophone
+Fellow | Discord
 
 https://discord.gg/wewesnerQd
