@@ -5,12 +5,14 @@ lua54 'yes'
 
 author 'fellow25'
 description 'FW Society (ESX Society modified with ox_lib)'
-version '1.0.2'
+version '1.0.3'
 
 shared_script {
     '@es_extended/imports.lua',
+    '@es_extended/locale.lua',
     '@ox_lib/init.lua',
-    'shared/*.lua'
+    'shared/*.lua',
+    'locales/*.lua'
 }
 
 server_scripts {
@@ -20,10 +22,6 @@ server_scripts {
 
 client_scripts {
     'client/main.lua'
-}
-
-files {
-	'locales/*.json'
 }
 
 dependencies {

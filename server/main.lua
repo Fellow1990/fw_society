@@ -1,9 +1,7 @@
-lib.locale()
-
 local Jobs = setmetatable({}, {__index = function(_, key)
 	return ESX.GetJobs()[key]
-end
-})
+end})
+
 local RegisteredSocieties = {}
 local SocietiesByName = {}
 
@@ -66,7 +64,7 @@ AddEventHandler('esx_society:withdrawMoney', function(societyName, amount)
 	TriggerEvent('esx_addonaccount:getSharedAccount', society.account, function(account)
 		if amount > 0 and account.money >= amount then
 			account.removeMoney(amount)
-			xPlayer.addMoney(amount, locale('money_add_reason'))
+			xPlayer.addMoney(amount, TranslateCap('money_add_reason'))
 			Config.Notify('have_withdrawn', xPlayer.source, ESX.Math.GroupDigits(amount))
 		end
 	end)
@@ -87,7 +85,7 @@ AddEventHandler('esx_society:depositMoney', function(societyName, amount)
 	end
 	if amount > 0 and xPlayer.getMoney() >= amount then
 		TriggerEvent('esx_addonaccount:getSharedAccount', society.account, function(account)
-			xPlayer.removeMoney(amount, locale('money_remove_reason'))
+			xPlayer.removeMoney(amount, TranslateCap('money_remove_reason'))
 			Config.Notify('have_deposited', xPlayer.source, ESX.Math.GroupDigits(amount))
 			account.addMoney(amount)
 		end)
