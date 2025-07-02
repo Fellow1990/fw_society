@@ -294,9 +294,15 @@ lib.callback.register('esx_society:isBoss', function(source, job)
 	return isPlayerBoss(source, job)
 end)
 
-function isPlayerBoss(playerId, job)
-	local xPlayer = ESX.GetPlayerFromId(playerId)
-	if xPlayer.job.name == job and Config.BossGrades[xPlayer.job.grade_name] then
-		return true
-	end
+function isPlayerBoss(playerId, arg)
+    local xPlayer = ESX.GetPlayerFromId(playerId)
+    local selected = xPlayer.job.name == arg and 'job' or xPlayer.job2.name == arg and 'job2' or false
+    local value = {}
+    if selected and xPlayer[selected].grade_name == 'boss' then
+		value = {true, selected}
+        return value
+    else
+        print(('esx_society: %s attempted open a society boss menu!'):format(xPlayer.identifier))
+        return false
+    end
 end
