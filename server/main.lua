@@ -128,40 +128,20 @@ AddEventHandler('esx_society:removeVehicleFromGarage', function(societyName, veh
 end)
 
 lib.callback.register('esx_society:getEmployees', function(source, society)
-    local employees = {}
-    local onlinePlayers = ESX.GetExtendedPlayers('job', society)
-    local onlineMap = {}
-    for _, xPlayer in pairs(onlinePlayers) do
-        local job = xPlayer.getJob()
-        local identifier = xPlayer.getIdentifier()
-        employees[#employees + 1] = {
-            identifier = identifier,
-            name = xPlayer.getName(),
-            label = job.label,
-            grade = job.grade,
-            grade_name = job.name,
-            grade_label = job.grade_label,
-            online = true
-        }
-        onlineMap[identifier] = true
-    end
-    local response = MySQL.query.await('SELECT * FROM `users` WHERE `job` = ?', {society})
-    for i = 1, #response do
-        local row = response[i]
-        local identifier = row.identifier
-        if not onlineMap[identifier] then
-            employees[#employees + 1] = {
-                identifier = identifier,
-                name = row.firstname .. ' ' .. row.lastname,
-                label = Jobs[society].label,
-                grade = row.job_grade,
-                grade_name = Jobs[society].grades[tostring(row.job_grade)].name,
-                grade_label = Jobs[society].grades[tostring(row.job_grade)].label,
-                online = false
-            }
-        end
-    end
-    return employees
+	local employees = {}
+	local response = MySQL.query.await('SELECT * FROM `users` WHERE `job` = ?', {society})
+	for i = 1, #response do
+		local row = response[i]
+		employees[#employees+1] = {				
+			identifier = row.identifier,
+			name = row.firstname..' '..row.lastname,
+			label = Jobs[society].label,
+			grade = row.job_grade,
+			grade_name = Jobs[society].grades[tostring(row.job_grade)].name,
+			grade_label = Jobs[society].grades[tostring(row.job_grade)].label
+		}
+	end
+	return employees
 end)
 
 lib.callback.register('esx_society:getJob', function(source, society)
@@ -294,7 +274,7 @@ lib.callback.register('esx_society:isBoss', function(source, job)
 	return isPlayerBoss(source, job)
 end)
 
-function isPlayerBoss(playerId, arg)
+function isPlayerBoss(playerId, job)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
 	if xPlayer.job.name == job and Config.BossGrades[xPlayer.job.grade_name] then
 		return true

@@ -3,9 +3,9 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-author 'fellow25'
-description 'FW Society (ESX Society modified with ox_lib)'
-version '1.0.3'
+description 'Provides a way for Jobs to have a society system. (boss menu, salaries, funding etc)'
+lua54 'yes'
+version '1.0'
 
 shared_script {
     '@es_extended/imports.lua',
@@ -26,6 +26,5 @@ client_scripts {
 
 dependencies {
     'es_extended',
-    'cron',
     'esx_addonaccount'
 }
